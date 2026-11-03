@@ -180,7 +180,7 @@ function run_case(spec::CaseSpec, meshdir::AbstractString; verbose::Bool = true)
         push!(cands, (C = rb.C + dh.dh, how = "radial:direct", eps_start = spec.eps - dh.dh,
                       rungs = Any[]))
         R["radial_C_V"] = rb.C; R["radial_rho"] = rb.rho; R["radial_nu"] = rb.nu
-        R["radial_nu_err"] = rb.nu_err; R["radial_s_rem"] = rb.s_rem
+        R["radial_nu_err"] = rb.nu_err; R["radial_s_rem"] = isfinite(rb.s_rem) ? rb.s_rem : nothing   # -Inf: no remainder
         R["C_cert_radial"] = rb.C + dh.dh
         # λ_1 ≥ -C_V(1) for the continuous problem (form bound with ε = 1)
         R["L1_trivial_radial"] = -radial_form_bound(spec, 1.0).C
@@ -225,15 +225,22 @@ function run_case(spec::CaseSpec, meshdir::AbstractString; verbose::Bool = true)
     # For each admissible ε of the grid: C(ε) = C_V(ε - d_h) + d_h (Lemma 3),
     # σ(ε) = C(ε) + 1 - ε, κ = 1 - ε. L_k(ε) is predicted from μ^σ - σ
     # interpolated in σ; each k gets its own ε_k (each L_k is a separate valid
-    # bound) and is then recomputed exactly at σ(ε_k).
+    # bound) and is then recomputed exactly at σ(ε_k). At ε = spec.eps the
+    # constant is min(radial, C_cert), so L_best ≥ L_opt up to the prediction error.
     if has_radial
         grid = Any[]
-        for e in spec.eps_grid
+        for e in sort(unique([spec.eps_grid; spec.eps]))
             (e - dh.dh > 0.05 && dh.dh / (1 - e) < 0.5) || continue
             rb = radial_form_bound(spec, e - dh.dh)
-            Ce = rb.C + dh.dh; se = Ce + 1 - e
+            Ce = rb.C + dh.dh; how = "radial:direct"
+            # at the target ε every certified candidate (ladders, ...) is available
+            if abs(e - spec.eps) < 1e-9 && Ccert < Ce
+                Ce = Ccert; how = cands[ib].how
+            end
+            se = Ce + 1 - e
             Lp = lower_bound_at(interp_shifted(solves, se), se, Ch, Gam, e, dh.dh)
-            push!(grid, (eps = e, C = Ce, C_V = rb.C, sigma = se, rho = rb.rho, L_pred = Lp))
+            push!(grid, (eps = e, C = Ce, C_V = rb.C, C_how = how, sigma = se, rho = rb.rho,
+                         L_pred = Lp))
         end
         if !isempty(grid)
             kbest = [argmax([g.L_pred[k] for g in grid]) for k in 1:spec.neig]
@@ -253,6 +260,7 @@ function run_case(spec::CaseSpec, meshdir::AbstractString; verbose::Bool = true)
             Lpk = [grid[kbest[k]].L_pred[k] for k in 1:spec.neig]
             R["eps_best"] = [grid[i].eps for i in kbest]
             R["C_best"] = [grid[i].C for i in kbest]
+            R["C_best_how"] = [grid[i].C_how for i in kbest]
             R["sigma_best"] = [grid[i].sigma for i in kbest]
             R["L_best_pred"] = Lpk
             R["L_best"] = Lb
@@ -260,7 +268,7 @@ function run_case(spec::CaseSpec, meshdir::AbstractString; verbose::Bool = true)
             R["perk_solves"] = [Dict("eps" => grid[gi].eps, "sigma" => grid[gi].sigma,
                                      "C" => grid[gi].C, "mu_minus_sigma" => exact[gi].mu_shifted,
                                      "L" => exact[gi].L) for gi in sort(collect(keys(exact)))]
-            R["perk_grid"] = [Dict("eps" => g.eps, "C" => g.C, "C_V" => g.C_V, "sigma" => g.sigma,
+            R["perk_grid"] = [Dict("eps" => g.eps, "C" => g.C, "C_V" => g.C_V, "C_how" => g.C_how, "sigma" => g.sigma,
                                    "rho" => g.rho, "L_pred" => g.L_pred) for g in grid]
             log("  per-k: eps=" * string(R["eps_best"]) * "  L_best=" *
                 string(round.(Lb, digits = 4)) * "  pred-exact=" *
