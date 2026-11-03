@@ -1,0 +1,16 @@
+name = "CoulombCECR"
+uuid = "5b0c1a6e-3f6e-4d8a-9a7e-2c4d1f0b7e21"
+authors = ["Xuefeng Liu"]
+version = "0.1.0"
+
+[deps]
+ArnoldiMethod = "ec485272-7323-5ecc-a04f-4719b315124d"
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+VFEM = "ec17fd68-d864-437b-9813-4c092c3d0aa1"
+
+[compat]
+julia = "1.10"

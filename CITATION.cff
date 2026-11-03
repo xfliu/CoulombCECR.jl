@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "CoulombCECR.jl"
+authors:
+  - family-names: Liu
+    given-names: Xuefeng
+preferred-citation:
+  type: article
+  title: "Explicit Two-Sided Eigenvalue Bounds for Schrödinger Operators with Singular Potentials"
+  authors:
+    - family-names: Liu
+      given-names: Xuefeng
+  year: 2026
