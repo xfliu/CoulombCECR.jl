@@ -1,0 +1,93 @@
+% Tables 6.2-6.5 of the revised paper (CoulombCECR.jl v1.1, floating point).
+
+\begin{table}[htbp]
+\caption{2D, one centre, on $[-5,5]^2$. Exact values: $\lambda_1=-1$, $\lambda_2=\lambda_3=-1/9$.}
+\label{tab:coulomb-2d-cecr}
+\centering\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{cccccc|crrcrr}
+\toprule
+$h$ & $N_{\rm tri}$ & $h_{\max}$ & $\Gamma_h$ & $d_h$ & $C_\epsilon^{\rm cert}$ & $k$ & $\mu_{k,h}^\sigma{-}\sigma$ & $L_k$ & $\epsilon_k$ & $L_k^{\rm opt}$ & $U_k$ \\
+\midrule
+\multirow{3}{*}{0.4} & \multirow{3}{*}{45\,340} & \multirow{3}{*}{0.5362} & \multirow{3}{*}{5.64e-3} & \multirow{3}{*}{8.56e-3} & \multirow{3}{*}{1.855} & 1 & $-1.0055$ & $-4.1576$ & 0.950 & $-1.0327$ & $-0.9983$ \\
+ & & & & & & 2 & $-0.1642$ & $-3.7084$ & 0.775 & $-0.2970$ & $0.0959$ \\
+ & & & & & & 3 & $-0.1642$ & $-3.7084$ & 0.775 & $-0.2970$ & $0.0959$ \\
+\midrule
+\multirow{3}{*}{0.2} & \multirow{3}{*}{169\,536} & \multirow{3}{*}{0.2745} & \multirow{3}{*}{1.52e-3} & \multirow{3}{*}{6.68e-3} & \multirow{3}{*}{1.829} & 1 & $-1.0021$ & $-2.1221$ & 0.925 & $-1.0196$ & $-0.9989$ \\
+ & & & & & & 2 & $-0.1628$ & $-1.4298$ & 0.725 & $-0.2239$ & $0.0952$ \\
+ & & & & & & 3 & $-0.1628$ & $-1.4298$ & 0.725 & $-0.2239$ & $0.0953$ \\
+\midrule
+\multirow{3}{*}{0.1} & \multirow{3}{*}{636\,136} & \multirow{3}{*}{0.1389} & \multirow{3}{*}{3.89e-4} & \multirow{3}{*}{6.02e-3} & \multirow{3}{*}{1.820} & 1 & $-1.0012$ & $-1.4142$ & 0.900 & $-1.0154$ & $-0.9991$ \\
+ & & & & & & 2 & $-0.1624$ & $-0.6245$ & 0.625 & $-0.2001$ & $0.0951$ \\
+ & & & & & & 3 & $-0.1624$ & $-0.6245$ & 0.625 & $-0.2001$ & $0.0951$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\caption{2D, two centres $a_{1,2}=(\mp2,0)$, on $[-7,7]\times[-5,5]$.}
+\label{tab:twocenter-2d-cecr}
+\centering\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{cccccc|crrcrr}
+\toprule
+$h$ & $N_{\rm tri}$ & $h_{\max}$ & $\Gamma_h$ & $d_h$ & $C_\epsilon^{\rm cert}$ & $k$ & $\mu_{k,h}^\sigma{-}\sigma$ & $L_k$ & $\epsilon_k$ & $L_k^{\rm opt}$ & $U_k$ \\
+\midrule
+\multirow{3}{*}{0.4} & \multirow{3}{*}{166\,294} & \multirow{3}{*}{0.5529} & \multirow{3}{*}{1.11e-2} & \multirow{3}{*}{1.43e-2} & \multirow{3}{*}{2.405} & 1 & $-1.3198$ & $-4.6536$ & 0.750 & $-1.4349$ & $-1.3168$ \\
+ & & & & & & 2 & $-1.1862$ & $-4.5842$ & 0.725 & $-1.3207$ & $-1.1823$ \\
+ & & & & & & 3 & $-0.3853$ & $-4.1767$ & 0.700 & $-0.6552$ & $-0.2122$ \\
+\midrule
+\multirow{3}{*}{0.2} & \multirow{3}{*}{623\,460} & \multirow{3}{*}{0.2774} & \multirow{3}{*}{2.84e-3} & \multirow{3}{*}{1.31e-2} & \multirow{3}{*}{2.135} & 1 & $-1.3186$ & $-2.5764$ & 0.550 & $-1.3747$ & $-1.3170$ \\
+ & & & & & & 2 & $-1.1844$ & $-2.4669$ & 0.550 & $-1.2477$ & $-1.1827$ \\
+ & & & & & & 3 & $-0.3847$ & $-1.8191$ & 0.550 & $-0.4977$ & $-0.2124$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\caption{3D hydrogen on $B(0,6)$. On $B(0,6)$: $\lambda_1^{R,N}=-0.30460$, $\lambda_2^{R,N}=-0.10397$, $\lambda_1^{R,D}=-0.21198$; on $\R^3$: $\lambda_1=-0.25$, $\lambda_2=-0.0625$. $U_k^N=\lambda_{k,h}^{N,P_1}$.}
+\label{tab:coulomb-3d-cecr}
+\centering\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{cccccc|crrcrrr}
+\toprule
+$h$ & $N_{\rm tet}$ & $h_{\max}$ & $\Gamma_h$ & $d_h$ & $C_\epsilon^{\rm cert}$ & $k$ & $\mu_{k,h}^\sigma{-}\sigma$ & $L_k$ & $\epsilon_k$ & $L_k^{\rm opt}$ & $U_k$ & $U_k^{N}$ \\
+\midrule
+\multirow{3}{*}{1.4} & \multirow{3}{*}{331\,200} & \multirow{3}{*}{1.4420} & \multirow{3}{*}{4.88e-2} & \multirow{3}{*}{6.37e-2} & \multirow{3}{*}{0.532} & 1 & $-0.3131$ & $-3.5602$ & 0.850 & $-0.4528$ & $-0.2093$ & $-0.3034$ \\
+ & & & & & & 2 & $-0.1082$ & $-3.5251$ & 0.775 & $-0.3645$ & $0.2520$ & $-0.1033$ \\
+ & & & & & & 3 & $-0.1081$ & $-3.5251$ & 0.775 & $-0.3645$ & $0.2563$ & $-0.1030$ \\
+\midrule
+\multirow{3}{*}{1.2} & \multirow{3}{*}{357\,120} & \multirow{3}{*}{1.2154} & \multirow{3}{*}{3.51e-2} & \multirow{3}{*}{4.75e-2} & \multirow{3}{*}{0.503} & 1 & $-0.3100$ & $-3.0597$ & 0.900 & $-0.4104$ & $-0.2098$ & $-0.3037$ \\
+ & & & & & & 2 & $-0.1079$ & $-3.0078$ & 0.750 & $-0.2987$ & $0.2501$ & $-0.1034$ \\
+ & & & & & & 3 & $-0.1079$ & $-3.0078$ & 0.750 & $-0.2987$ & $0.2534$ & $-0.1032$ \\
+\midrule
+\multirow{3}{*}{1.0} & \multirow{3}{*}{400\,320} & \multirow{3}{*}{1.0298} & \multirow{3}{*}{2.32e-2} & \multirow{3}{*}{3.24e-2} & \multirow{3}{*}{0.476} & 1 & $-0.3082$ & $-2.5414$ & 0.900 & $-0.3748$ & $-0.2103$ & $-0.3041$ \\
+ & & & & & & 2 & $-0.1077$ & $-2.4697$ & 0.750 & $-0.2385$ & $0.2478$ & $-0.1036$ \\
+ & & & & & & 3 & $-0.1077$ & $-2.4697$ & 0.750 & $-0.2385$ & $0.2502$ & $-0.1034$ \\
+\midrule
+\multirow{3}{*}{0.8} & \multirow{3}{*}{452\,160} & \multirow{3}{*}{0.8107} & \multirow{3}{*}{1.30e-2} & \multirow{3}{*}{1.94e-2} & \multirow{3}{*}{0.454} & 1 & $-0.3069$ & $-1.8952$ & 0.925 & $-0.3449$ & $-0.2108$ & $-0.3044$ \\
+ & & & & & & 2 & $-0.1076$ & $-1.7938$ & 0.750 & $-0.1845$ & $0.2458$ & $-0.1037$ \\
+ & & & & & & 3 & $-0.1076$ & $-1.7938$ & 0.750 & $-0.1845$ & $0.2473$ & $-0.1036$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\caption{3D $\mathrm{H}_2^+$ on $[-8,8]\times[-6,6]^2$, $a_{1,2}=(\mp2,0,0)$, mirror-symmetric meshes. Reference: $\lambda_1\approx-0.5513$.}
+\label{tab:twocenter-3d-cecr}
+\centering\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{cccccc|crrcrr}
+\toprule
+$h$ & $N_{\rm tet}$ & $h_{\max}$ & $\Gamma_h$ & $d_h$ & $C_\epsilon^{\rm cert}$ & $k$ & $\mu_{k,h}^\sigma{-}\sigma$ & $L_k$ & $\epsilon_k$ & $L_k^{\rm opt}$ & $U_k$ \\
+\midrule
+\multirow{3}{*}{1.0} & \multirow{3}{*}{1\,647\,712} & \multirow{3}{*}{0.9841} & \multirow{3}{*}{2.44e-2} & \multirow{3}{*}{1.25e-2} & \multirow{3}{*}{1.325} & 1 & $-0.5617$ & $-2.4043$ & 0.675 & $-0.7660$ & $-0.5442$ \\
+ & & & & & & 2 & $-0.3593$ & $-2.3205$ & 0.675 & $-0.6203$ & $-0.3157$ \\
+ & & & & & & 3 & $-0.2727$ & $-2.2853$ & 0.650 & $-0.5604$ & $-0.1053$ \\
+\midrule
+\multirow{3}{*}{0.5} & \multirow{3}{*}{2\,338\,576} & \multirow{3}{*}{0.5371} & \multirow{3}{*}{1.23e-2} & \multirow{3}{*}{1.11e-2} & \multirow{3}{*}{1.323} & 1 & $-0.5605$ & $-1.4007$ & 0.575 & $-0.6608$ & $-0.5443$ \\
+ & & & & & & 2 & $-0.3575$ & $-1.2545$ & 0.550 & $-0.4821$ & $-0.3161$ \\
+ & & & & & & 3 & $-0.2716$ & $-1.1931$ & 0.550 & $-0.4078$ & $-0.1067$ \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -24,7 +24,7 @@ for case,mesh,rd in runs:
             L1_trivial_radial=N["L1_trivial_radial"] if k==0 else "",
             U_dirichlet=N["U_dirichlet"][k],U_neumann=N["U_neumann"][k] if "U_neumann" in N else "",
             wall_s_new=N["wall_s"]))
-with open(NEW+"trackA_summary.csv","w",newline="") as f:
+with open(NEW+"form_bound_summary.csv","w",newline="") as f:
     w=csv.DictWriter(f,fieldnames=cols); w.writeheader()
     for r in rows: w.writerow({k:(f"{v:.6g}" if isinstance(v,float) else v) for k,v in r.items()})
 print("rows",len(rows),"missing",missing)

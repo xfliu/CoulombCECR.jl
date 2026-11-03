@@ -1,7 +1,7 @@
 # Reproducing the numerical results
 
 All commands are run from the repository root. Threads: `julia -t auto` (or `-t N`).
-The timings were measured on the group server (multi-core x86-64, Julia 1.12.6).
+The timings were measured on the group server (96 cores, 251 GB; 16 Julia threads, Julia 1.12.6).
 
 ## 0. Meshes
 
@@ -29,16 +29,11 @@ python3 meshgen/gen_box_h2plus.py --h 1.0 --output meshes/box_R6_h100_opt
 Mesh checks: `meshgen/compare_meshes_2d.py` and `meshgen/compare_meshes_3d.py` report h_max and the free edges/facets
 in the interior (these must be 0 for a conforming mesh).
 
-## 1. Certified continuous form bound (needed for C_eps^cert, Sec. 4.4 + Lemma 3 transfer)
+## 1. Form-bound constant
 
-```sh
-# 2D: chained ladder on the fine mesh; eps list = target eps_f values
-julia -t auto --project=. scripts/certify_continuous_chain.jl 2d_one_centre meshes/square_h005_opt 0.52,0.53,0.535,0.54,0.545,0.548 results/2d
-julia -t auto --project=. scripts/certify_continuous_chain.jl 2d_two_centre meshes/box_h010_fixed   0.52,0.53,0.535,0.54,0.545,0.548 results/2d
-# 3D hydrogen: ladder on the finest conforming ball, analytic start eps0 = 0.3
-CECR_MAX_RUNGS=1 julia -t auto --project=. scripts/certify_continuous.jl 3d_hydrogen meshes/ball_R6_h060_conf 0.45,0.5 results/3d 0.3
-```
-Each run writes `contbound_<case>.json` (about 1 h each in 2D).
+The constant C_eps^cert is computed inside `run.jl` from the Neumann-decoupling bound (`src/radialbound.jl`;
+1D radial problem, seconds). The fine-mesh certification of v1.0 (`scripts/certify_continuous*.jl`, about 1 h per
+case) is kept for comparison only and is not needed; pass `CECR_NO_TRANSFER=1` to ignore its output files.
 
 ## 2. Bounds per mesh (Tables 6.2–6.5)
 
@@ -47,18 +42,22 @@ C_eps is transferred from it; otherwise only the ladders on the current mesh are
 
 | Table | Command | Wall time |
 |---|---|---|
-| 6.2 (2D, one centre) | `scripts/run.jl 2d_one_centre {1, meshes/square_h020_fixed, 3} results/2d` | 3 / 6 / 26 min |
-| 6.3 (2D, two centres) | `scripts/run.jl 2d_two_centre {1, meshes/box_h020_fixed} results/2d` | 5 / 15 min |
-| 6.4 (3D hydrogen) | `CECR_MAX_RUNGS=1 scripts/run.jl 3d_hydrogen meshes/ball_R6_hXXX_conf results/3d` | 16–24 min each |
-| 6.5 (3D H₂⁺) | `CECR_MAX_RUNGS=1 scripts/run.jl 3d_h2plus 1 results/3d_analytic_only` | 61 min, ~50 GB RAM |
+| 6.2 (2D, one centre) | `CECR_NO_TRANSFER=1 scripts/run.jl 2d_one_centre {1, meshes/square_h020_fixed, 3} results/v1.1/2d` | 1 / 2 / 7 min |
+| 6.3 (2D, two centres) | `CECR_NO_TRANSFER=1 scripts/run.jl 2d_two_centre {1, meshes/box_h020_fixed} results/v1.1/2d` | 2 / 7 min |
+| 6.4 (3D hydrogen) | `CECR_MAX_RUNGS=0 CECR_NO_TRANSFER=1 scripts/run.jl 3d_hydrogen meshes/ball_R6_hXXX_conf results/v1.1/3d` | 9–14 min each |
+| 6.5 (3D H2+) | `CECR_SYMMETRY=1,2,3 CECR_MAX_RUNGS=0 CECR_NO_TRANSFER=1 scripts/run.jl 3d_h2plus meshes/box_sym_h{100,050} results/v1.1/3d_sym` | 20 min, 15 GB (h=1) / 29 min, 22 GB (h=0.5) |
+
+Symmetric H2+ meshes: `python3 meshgen/gen_box_symmetric.py --h 1.0 --output meshes/box_sym_h100` (and `--h 0.5`).
+Without `CECR_SYMMETRY` the H2+ run on the h=1 mesh needs ~100 GB of memory; with it, ~8 GB.
 
 (prefix each with `julia -t auto --project=.`). Each run writes `<case>_<mesh>.json` with d_h (patch/off-patch),
 Γ_h, C_h, ε_h, C_eps^cert (and the P1 diagnostic), μ_{k,h}^σ, L_k, L_k^opt and the P1 upper bounds U_k.
 
 ## 3. Tables
 
-The stored JSONs in `results/` are those used for the validation report. The LaTeX tables are generated from them
-(see `validation_all_recomputed.csv` / `tables_recomputed.tex` in the validation material).
+`results/v1.1/` holds the JSONs behind the tables of the revised paper (`results/v1.1/tables.tex`);
+`results/v1.0/` holds the first validation run (fine-mesh transfer of C_eps, original and conforming meshes).
+`docs/` contains the development notes of the form-bound and symmetry extensions.
 
 ## Notes
 * Floating point only. Singular integrals use collapsed (Duffy) Gauss rules. Eigenvalues come from sparse Cholesky

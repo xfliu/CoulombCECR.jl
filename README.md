@@ -20,6 +20,8 @@ that is specific to the singular potential:
 | Def. 1, Lemma 6 | `src/constants.jl` | elementwise reaction constant $\Gamma_h$ |
 | Thm 4.2 | `src/constants.jl`, `src/cecr.jl` | shifted CECR Ritz values $\mu_{k,h}^\sigma$, lower bound $L_k^{\mu,\sigma}$ |
 | Lemma 3, Sec. 4.4 | `src/formbound.jl` | certified form-bound constant $C_\epsilon^{\rm cert}$ (ladders, fine-mesh transfer) |
+| Lemma (Neumann decoupling) | `src/radialbound.jl` | continuous constant $C_V(\epsilon)$ from the 1D radial Neumann problem; per-$k$ choice of $\epsilon$ |
+| Sec. 6 (mirror symmetry) | `src/symmetry.jl` | CECR eigenproblem split into parity classes on mirror-symmetric meshes |
 | Thm 5.3 | `src/perturbation.jl` | patch/off-patch estimate $d_h$ with optimised patch |
 | Thm 5.4 | `src/pipeline.jl` | $L_k=(1-\varepsilon_h)(L_k^{\mu,\sigma}+\sigma)-\sigma$, $U_k$ |
 | — | `src/p1.jl` | conforming $P_1$ upper bounds (Dirichlet / Neumann) |
@@ -59,9 +61,14 @@ See `REPRODUCE.md` (mesh generation, commands per table, timings).
 * The 2D generator `meshgen/gen_mesh_2d.py --paper-compat` reproduces the paper's meshes exactly (needs scipy 1.8.0).
   Without the flag it produces conforming meshes (boundary seeds clipped).
 * `meshgen/gen_ball_conforming.jl` replaces the paper's ball generator: same nodes, face-conforming tetrahedra.
+* `meshgen/gen_box_symmetric.py` generates the mirror-symmetric H2+ box meshes (octant mesh, reflected); the grading rate
+  `--theta` and the first radius `--r_start` are independent of `--h`.
 * The certified form-bound constant $C_\epsilon^{\rm cert}$ is obtained from Sec. 4.4 ladders. Where available, it is
-  transferred from a continuous bound certified on a fine mesh (Lemma 3). The $P_1$ Galerkin value is reported
+  transferred from a continuous bound certified on a fine mesh (Lemma 3). Since v1.1 the main source is the
+  Neumann-decoupling bound `decoupled_form_bound` (no fine mesh needed). The $P_1$ Galerkin value is reported
   only as a diagnostic; it is not a bound.
+* Environment variables of `scripts/run.jl`: `CECR_MAX_RUNGS` (0 = no ladders), `CECR_NO_TRANSFER=1`,
+  `CECR_SYMMETRY=1,2,3` (mirror planes used by the CECR solves).
 
 ## License
 

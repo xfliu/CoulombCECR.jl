@@ -51,7 +51,7 @@ The radii are optimised as ρ_i = t·ρ_max,i: a 100-point grid in t ∈ (0,1], 
 - H2+ check: L_1 goes from -0.920 to -0.786 at ε=0.6 (L_opt) and to -0.7817 with per-k ε (prototype: about -0.78).
 - Hydrogen h=0.8 check: L_1 goes from -0.3646 to -0.3449 (prototype: about -0.345).
 
-## 3. Results (k = 1; full table in trackA_summary.csv)
+## 3. Results (k = 1; full table in form_bound_summary.csv)
 
 | case / mesh | C_cert old → new [source] | L_opt old → new | per-k: ε_1, L_best,1 | -C_V(1) | U |
 |---|---|---|---|---|---|
