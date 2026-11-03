@@ -6,3 +6,5 @@ meshes/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+logs/
+results_new/*.tmp

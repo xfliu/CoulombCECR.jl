@@ -9,15 +9,19 @@
 #   a LOWER estimate, kept only for comparison with the original code.
 
 """
-    certify_ceps_rung(vm, m, c, eps, eps_pre, C_pre; delta) -> NamedTuple
+    certify_ceps_rung(vm, m, c, eps, eps_pre, C_pre; delta, eigfun=cecr_eigs) -> NamedTuple
+
+`eigfun(vm, q, sigma, k)` computes the CECR eigenvalues (e.g. a wrapper of
+`cecr_eigs_case` for the symmetry-sector solver).
 """
 function certify_ceps_rung(vm, m::SimplexMesh, c::AbstractVector, eps::Float64,
-                           eps_pre::Float64, C_pre::Float64; delta::Float64 = 1e-3)
+                           eps_pre::Float64, C_pre::Float64; delta::Float64 = 1e-3,
+                           eigfun = cecr_eigs)
     eps_pre < eps || throw(ArgumentError("need eps_pre < eps"))
     q = -max.(-c, 0.0) ./ eps                 # q_h = -c_h^-/ε  (≤ 0)
     epst = eps_pre / eps; Ct = C_pre / eps    # assumption for q_h^-
     sig = Ct + delta
-    nu, info = cecr_eigs(vm, q, sig, 1)
+    nu, info = eigfun(vm, q, sig, 1)
     Ch = interp_constant(m)
     Gam = reaction_constant(m, q)              # = Γ_h(c_h)/ε
     nu_low = cecr_lower(nu, sig, Ch, Gam, epst)[1]
@@ -27,16 +31,17 @@ function certify_ceps_rung(vm, m::SimplexMesh, c::AbstractVector, eps::Float64,
 end
 
 """
-    ceps_ladder(vm, m, c, eps_seq, C_first; delta) -> Vector of rung results
+    ceps_ladder(vm, m, c, eps_seq, C_first; delta, eigfun=cecr_eigs) -> Vector of rung results
 
 `C_first` must be a valid constant for ε = eps_seq[1] (e.g. from
 Lemma 3). Each later rung uses the previous rung as preliminary bound.
 """
 function ceps_ladder(vm, m::SimplexMesh, c::AbstractVector, eps_seq::Vector{Float64},
-                     C_first::Float64; delta::Float64 = 1e-3)
+                     C_first::Float64; delta::Float64 = 1e-3, eigfun = cecr_eigs)
     out = Any[(C = C_first, eps = eps_seq[1], source = "preliminary")]
     for j in 2:length(eps_seq)
-        r = certify_ceps_rung(vm, m, c, eps_seq[j], eps_seq[j-1], out[end].C; delta = delta)
+        r = certify_ceps_rung(vm, m, c, eps_seq[j], eps_seq[j-1], out[end].C; delta = delta,
+                              eigfun = eigfun)
         push!(out, r)
     end
     return out

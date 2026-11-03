@@ -28,11 +28,14 @@ include("cecr.jl")
 include("symmetry.jl")
 include("p1.jl")
 include("formbound.jl")
+include("radialbound.jl")
 include("pipeline.jl")
 
 export Coulomb, SimplexMesh, cell_averages, direct_dh, interp_constant,
        reaction_constant, cecr_lower, corrected_lower, cecr_eigs, p1_bounds,
        certify_ceps_rung, ceps_ladder, ceps_p1_galerkin, smallest_eigs,
-       CaseSpec, run_case, cecr_eigs_case, cecr_eigs_symmetric, interior_free_facets, load_vfem_mesh, collapsed_rule, gauss_legendre01
+       CaseSpec, run_case, cecr_eigs_case, cecr_eigs_symmetric, interior_free_facets, load_vfem_mesh, collapsed_rule, gauss_legendre01,
+       radial_neumann_ground, decoupled_form_bound, radial_form_bound, interp_shifted,
+       lower_bound_at
 
 end
