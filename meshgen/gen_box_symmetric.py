@@ -16,7 +16,9 @@ Recipe (constants of gen_box_h2plus.py; theta is NOT tied to h here):
     restricted to y >= band*sp, z >= band*sp  (interior of the quarter sphere)
     + points EXACTLY on the half great circles in the planes z = 0 and y = 0
       (angle step pi/ceil(pi r/sp), shell-dependent offset) + the two poles on the x-axis;
-    shell points with x < band*sp are dropped (the plane x = 0 is sampled by face seeds);
+    shell points with x < band*sp are dropped; the shells of the mirror nucleus (-2,0,0) are
+    added in the same way (as in the original, both shell families fill the region near x = 0),
+    and the plane x = 0 gets exact points on the quarter circles where the shells cut it;
   * face seeds on the 6 octant faces (spacing c_face*h, jitter 0.04*spacing away from the
     face edges); on the symmetry planes no face seed within 20*r_start of a nucleus;
   * jittered Cartesian background (c_bg*h, jitter 0.15*spacing) outside 20*r_start;
@@ -66,6 +68,30 @@ def quarter_shell(a, r, sp, idx, band):
     return P
 
 
+def plane_x0_points(ax, theta, c_angular, h_cap, L):
+    """graded polar point set on the quarter plane {x = 0, 0 <= y <= Ly, 0 <= z <= Lz}, with local
+    spacing f(rho) = min(c_angular*theta*r, h), r = sqrt(rho^2 + ax^2) the distance to the nearest
+    nucleus (= the angular spacing of the shells there); rings rho_{k+1} = rho_k + f(rho_k),
+    quarter-arc points with spacing f (shell-dependent offset), ring ends exactly on the edges."""
+    f = lambda rho: min(c_angular * theta * math.sqrt(rho * rho + ax * ax), h_cap)
+    out = [np.zeros((1, 3))]
+    rho, k = f(0.0), 0
+    rmax = math.hypot(L[1], L[2])
+    while rho < rmax:
+        sp = f(rho)
+        m = max(1, int(math.ceil(0.5 * math.pi * rho / sp)))
+        s = math.fmod(k * 0.6180339887498949 + 0.25, 1.0)
+        t = 0.5 * math.pi * (np.arange(m) + s) / m
+        t = t[(t > 0.3 * math.pi / (2 * m)) & (t < 0.5 * math.pi - 0.3 * math.pi / (2 * m))]
+        Q = np.zeros((len(t) + 2, 3))
+        Q[:len(t), 1] = rho * np.cos(t); Q[:len(t), 2] = rho * np.sin(t)
+        Q[len(t), 1] = rho; Q[len(t) + 1, 2] = rho
+        Q = Q[(Q[:, 1] <= L[1]) & (Q[:, 2] <= L[2])]
+        out.append(Q)
+        rho += sp; k += 1
+    return np.vstack(out)
+
+
 def add_atom_shells(pts, a, theta, L, r_start, c_radial, c_angular, h_cap, band):
     R_max = math.sqrt(sum(x * x for x in L)) * 1.05
     growth = 1.0 + c_radial * theta
@@ -76,8 +102,6 @@ def add_atom_shells(pts, a, theta, L, r_start, c_radial, c_angular, h_cap, band)
         keep = np.all(P <= np.asarray(L), axis=1) & (P[:, 0] >= band * sp) & (P[:, 1] >= 0) & (P[:, 2] >= 0)
         pts.append(P[keep])
         r *= growth; idx += 1
-
-
 def add_octant_faces(pts, L, spacing, atoms, excl_r, jitter=0.04, seed=7):
     rng = np.random.default_rng(seed)
     edge_tol = 0.3 * spacing
@@ -210,8 +234,13 @@ def main():
     assert np.all(atoms[:, 1:] == 0) and np.all(atoms[:, 0] > 0), "nuclei must lie on the positive x-axis"
     t0 = time.time()
     pts = [atoms.copy()]
+    # shells of every nucleus of the full box (incl. the mirror images -a), restricted to the octant:
+    # the octant point set is then the restriction of a point set of the original type; the plane x=0
+    # gets a graded polar point set (plane_x0_points)
     for at in atoms:
         add_atom_shells(pts, at, a.theta, L, a.r_start, c_radial, c_angular, a.h, a.band)
+        add_atom_shells(pts, at * np.array([-1.0, 1.0, 1.0]), a.theta, L, a.r_start, c_radial, c_angular, a.h, a.band)
+    pts.append(plane_x0_points(float(atoms[:, 0].min()), a.theta, c_angular, a.h, L))
     add_octant_faces(pts, L, c_face * a.h, atoms, 20 * a.r_start)
     add_octant_bg(pts, L, c_bg * a.h, atoms, 20 * a.r_start)
     P = np.vstack(pts)
