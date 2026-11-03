@@ -28,7 +28,19 @@ Base.@kwdef struct CaseSpec
     cont_bounds::Vector{Tuple{Float64,Float64}} = Tuple{Float64,Float64}[]
                                       # extra continuous bounds (ε, C) for V^-
                                       # (e.g. certified on a finer mesh)
+    symmetry::Vector{Int} = Int[]     # coordinate planes x_i = 0 of mirror symmetry of
+                                      # domain, potential and mesh (empty: none)
 end
+
+"""
+    cecr_eigs_case(spec, vm, c, sigma, k; kw...)
+
+CECR eigenvalues for a case: full solve, or the symmetry-sector solve
+(`cecr_eigs_symmetric`) when `spec.symmetry` is non-empty.
+"""
+cecr_eigs_case(spec::CaseSpec, vm, c, sigma, k; kw...) =
+    isempty(spec.symmetry) ? cecr_eigs(vm, c, sigma, k; kw...) :
+                             cecr_eigs_symmetric(vm, c, sigma, k, spec.symmetry; kw...)
 
 load_vfem_mesh(dir, dim) = dim == 2 ? mesh2d_load_ne(dir) : mesh_load_from_folder(dir)
 
@@ -71,7 +83,7 @@ function run_case(spec::CaseSpec, meshdir::AbstractString; verbose::Bool = true)
     # ---- analytic shift ---------------------------------------------------
     kap = min(1 - spec.eps, spec.sigma - spec.Ceps)
     epsh = dh.dh / kap
-    mu, inf1 = cecr_eigs(vm, c, spec.sigma, spec.neig)
+    mu, inf1 = cecr_eigs_case(spec, vm, c, spec.sigma, spec.neig)
     Lmu = cecr_lower(mu, spec.sigma, Ch, Gam, spec.eps)
     R["kappa"] = kap; R["eps_h"] = epsh
     R["mu_minus_sigma"] = mu .- spec.sigma; R["L_mu_sigma"] = Lmu
@@ -130,7 +142,7 @@ function run_case(spec::CaseSpec, meshdir::AbstractString; verbose::Bool = true)
     for (tag, Cv) in tags
         sopt = Cv + (1 - spec.eps)
         kopt = min(1 - spec.eps, sopt - Cv)
-        muo, _ = cecr_eigs(vm, c, sopt, spec.neig)
+        muo, _ = cecr_eigs_case(spec, vm, c, sopt, spec.neig)
         Lmuo = cecr_lower(muo, sopt, Ch, Gam, spec.eps)
         R["sigma_"*tag] = sopt; R["eps_h_"*tag] = dh.dh / kopt
         R["L_"*tag] = corrected_lower(Lmuo, sopt, dh.dh / kopt)
