@@ -126,4 +126,5 @@ import VFEM
         @test interp_shifted(S, 4.0) ≈ [3.0, 4.0]          # linear extrapolation
         @test interp_shifted([(1.0, [5.0])], 7.0) ≈ [5.0]
     end
+    include("test_symmetry.jl")
 end

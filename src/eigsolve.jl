@@ -4,6 +4,7 @@
 # so it is deliberately not used.)
 
 using SparseArrays: SparseMatrixCSC
+import SparseArrays
 using LinearAlgebra: cholesky, Symmetric, mul!, ldiv!, Hermitian, issuccess
 import LinearAlgebra
 using ArnoldiMethod: partialschur, partialeigen
@@ -52,5 +53,7 @@ function smallest_eigs(A::SparseMatrixCSC, M::SparseMatrixCSC, k::Int;
                x = X[:, i]; r = As * x - λ[i] * (Ms * x)
                sqrt(sum(abs2, r)) / sqrt(sum(abs2, Ms * x))
            end for i in 1:k]
-    return λ[1:k], (residuals = res, nconv = hist.nconverged, mvproducts = hist.mvproducts)
+    fnnz = try SparseArrays.nnz(F) catch; 0 end
+    return λ[1:k], (residuals = res, nconv = hist.nconverged, mvproducts = hist.mvproducts,
+                    factor_nnz = fnnz)
 end
