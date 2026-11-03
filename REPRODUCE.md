@@ -48,7 +48,8 @@ C_eps is transferred from it; otherwise only the ladders on the current mesh are
 | 6.5 (3D H2+) | `CECR_SYMMETRY=1,2,3 CECR_MAX_RUNGS=0 CECR_NO_TRANSFER=1 scripts/run.jl 3d_h2plus meshes/box_sym_h{100,050} results/v1.1/3d_sym` | 20 min, 15 GB (h=1) / 29 min, 22 GB (h=0.5) |
 
 Symmetric H2+ meshes: `python3 meshgen/gen_box_symmetric.py --h 1.0 --output meshes/box_sym_h100` (and `--h 0.5`).
-Without `CECR_SYMMETRY` the H2+ run on the h=1 mesh needs ~100 GB of memory; with it, ~8 GB.
+On the h=1 mesh the CECR eigensolve needs ~103 GB without `CECR_SYMMETRY` and ~8 GB with it; the complete
+symmetric run peaks at ~15 GB (h=1) and ~22 GB (h=0.5).
 
 (prefix each with `julia -t auto --project=.`). Each run writes `<case>_<mesh>.json` with d_h (patch/off-patch),
 Γ_h, C_h, ε_h, C_eps^cert (and the P1 diagnostic), μ_{k,h}^σ, L_k, L_k^opt and the P1 upper bounds U_k.
