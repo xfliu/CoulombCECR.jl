@@ -1,0 +1,13 @@
+{
+  "all_sector_first8_absolute_error": 1.509903313490213e-14,
+  "all_sector_full_spectrum_relative_error": 1.1446223193971064e-15,
+  "face_cell_duality_error": 3.438231365542344e-15,
+  "local_patch_maxnorm_relative_error": 1.3322676295501878e-15,
+  "ordinary_vfem_mass_relative_error": 2.175053363534977e-15,
+  "ordinary_vfem_stiffness_relative_error": 2.1185485720439287e-15,
+  "singular_P1_refinement_relative_error": 1.2452805411252825e-13,
+  "singular_average_refinement_relative_error": 3.2307490016592055e-14,
+  "status": "passed",
+  "tiny_scale_mass_relative_error": 0.0,
+  "tiny_scale_stiffness_relative_error": 0.0
+}

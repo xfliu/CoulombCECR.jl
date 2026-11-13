@@ -1,6 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite the paper below."
 title: "CoulombCECR.jl"
+version: "1.2.0"
+license: MIT
+repository-code: "https://github.com/xfliu/CoulombCECR.jl"
 authors:
   - family-names: Liu
     given-names: Xuefeng

@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "pages": 22,
+  "spectral_rows": 45,
+  "mesh_levels": 15,
+  "numerical_assets_unchanged": true,
+  "overfull_boxes": 0,
+  "undefined_references": 0,
+  "embedding_appendix": {
+    "name": "Appendix A",
+    "pages": [
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "subsections": 7,
+    "exact_rational_certificates": "passed",
+    "independent_mathematical_reviews": "passed",
+    "appendix_links": "verified",
+    "local_build": "TeX Live 2026 passed",
+    "server_build": "TeX Live 2022 passed"
+  },
+  "arithmetic": "Eigenvalue and quadrature computations use Float64; rounded embedding constants certified by exact rational comparisons."
+}

@@ -1,0 +1,136 @@
+{
+  "status": "passed",
+  "runs": 8,
+  "new_logic_selftest": "passed",
+  "checks": "actual candidate/formula/metadata matching; baseline dominance; fresh baseline+P1 reproducibility; ordered bounds; admissibility; source hashes; residuals",
+  "records": [
+    {
+      "file": "2d_one_centre_h0.1.json",
+      "max_primary_equation_residual": 3.8181247335862263e-10,
+      "n_actual_cecr_solves": 3,
+      "L_best": [
+        -1.0042183219151242,
+        -0.1840047461223493,
+        -0.18400474612234774
+      ],
+      "whole_space_confinement": [
+        true,
+        false,
+        false
+      ],
+      "wall_s": 88.76449203491211
+    },
+    {
+      "file": "2d_one_centre_h0.2.json",
+      "max_primary_equation_residual": 3.040615220079073e-10,
+      "n_actual_cecr_solves": 3,
+      "L_best": [
+        -1.0133488680434157,
+        -0.2435594688956808,
+        -0.2435594688956395
+      ],
+      "whole_space_confinement": [
+        true,
+        false,
+        false
+      ],
+      "wall_s": 25.601688861846924
+    },
+    {
+      "file": "2d_one_centre_h0.4.json",
+      "max_primary_equation_residual": 1.682588663550448e-11,
+      "n_actual_cecr_solves": 3,
+      "L_best": [
+        -1.0438906888129047,
+        -0.43716031325920623,
+        -0.43716031325920457
+      ],
+      "whole_space_confinement": [
+        true,
+        false,
+        false
+      ],
+      "wall_s": 14.528101921081543
+    },
+    {
+      "file": "2d_one_centre_h0.8.json",
+      "max_primary_equation_residual": 1.0847824572666067e-10,
+      "n_actual_cecr_solves": 3,
+      "L_best": [
+        -1.1467045948125445,
+        -0.8835888829981586,
+        -0.8835888829981579
+      ],
+      "whole_space_confinement": [
+        true,
+        false,
+        false
+      ],
+      "wall_s": 9.56675386428833
+    },
+    {
+      "file": "2d_two_centre_h0.1.json",
+      "max_primary_equation_residual": 2.985513654785566e-10,
+      "n_actual_cecr_solves": 5,
+      "L_best": [
+        -1.3389895054404515,
+        -1.2087648344044981,
+        -0.4385758448848307
+      ],
+      "whole_space_confinement": [
+        true,
+        true,
+        false
+      ],
+      "wall_s": 260.9101037979126
+    },
+    {
+      "file": "2d_two_centre_h0.2.json",
+      "max_primary_equation_residual": 9.364487282418807e-11,
+      "n_actual_cecr_solves": 5,
+      "L_best": [
+        -1.396912261963089,
+        -1.2779956225276927,
+        -0.5840201363157365
+      ],
+      "whole_space_confinement": [
+        true,
+        true,
+        false
+      ],
+      "wall_s": 62.77212905883789
+    },
+    {
+      "file": "2d_two_centre_h0.4.json",
+      "max_primary_equation_residual": 2.0158098276649227e-11,
+      "n_actual_cecr_solves": 4,
+      "L_best": [
+        -1.589664521193851,
+        -1.5048560173172572,
+        -1.0294611949247703
+      ],
+      "whole_space_confinement": [
+        true,
+        true,
+        false
+      ],
+      "wall_s": 20.051410913467407
+    },
+    {
+      "file": "2d_two_centre_h0.8.json",
+      "max_primary_equation_residual": 2.3397541891121122e-11,
+      "n_actual_cecr_solves": 3,
+      "L_best": [
+        -2.080997055234048,
+        -2.057908293042175,
+        -1.940759105845106
+      ],
+      "whole_space_confinement": [
+        true,
+        true,
+        false
+      ],
+      "wall_s": 11.258602142333984
+    }
+  ]
+}

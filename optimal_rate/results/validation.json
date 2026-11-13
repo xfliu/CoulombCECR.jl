@@ -1,0 +1,9 @@
+{
+  "ordinary_vfem_mass_relative_error": 1.8516494430862277e-14,
+  "ordinary_vfem_stiffness_relative_error": 1.918854665076088e-14,
+  "singular_cell_average_analytic_relative_error": 1.3722356584366935e-13,
+  "sparse_dense_eigenvalue_max_difference": 3.042011087472929e-13,
+  "status": "passed",
+  "tiny_translation_mass_relative_error": 0.0,
+  "tiny_translation_stiffness_relative_error": 0.0
+}

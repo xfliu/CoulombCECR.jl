@@ -1,6 +1,6 @@
 import json, csv, os
-REL="/mnt/ssd2T-2/xfliu/CoulombCECR_release/results/"
-NEW="/mnt/ssd2T-2/xfliu/CoulombCECR_trackA/results_new/"
+REL=os.environ.get("CECR_RESULTS_OLD", "results/v1.0/")
+NEW=os.environ.get("CECR_RESULTS_NEW", "results/v1.1/")
 runs=[("2d_one_centre","square_h040_opt","2d"),("2d_one_centre","square_h020_fixed","2d"),
       ("2d_one_centre","square_h010_opt","2d"),("2d_two_centre","box_h040_opt","2d"),
       ("2d_two_centre","box_h020_fixed","2d"),

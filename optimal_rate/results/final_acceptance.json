@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "runs": 8,
+  "original_tests": 57,
+  "new_tests": 111,
+  "primary_residual_threshold": 1e-08,
+  "fixed_shift_residual_note": "Saved separately as comparative diagnostics; primary rate uses optimized shift.",
+  "checks": [
+    {
+      "file": "2d_one_centre_h0.1.json",
+      "all_three_bounds_ordered": true,
+      "admissible_shifts": true,
+      "optimized_dh_below_geometric_majorant": true,
+      "max_primary_equation_residual": 3.8181247335862263e-10,
+      "max_fixed_shift_equation_residual": 8.704765795461141e-08,
+      "max_fixed_shift_relative_equation_residual": 3.785241301250168e-09,
+      "wall_s": 97.60457682609558
+    },
+    {
+      "file": "2d_one_centre_h0.2.json",
+      "all_three_bounds_ordered": true,
+      "admissible_shifts": true,
+      "optimized_dh_below_geometric_majorant": true,
+      "max_primary_equation_residual": 5.543080094249005e-11,
+      "max_fixed_shift_equation_residual": 3.236656080091607e-08,
+      "max_fixed_shift_relative_equation_residual": 1.4077271475925284e-09,
+      "wall_s": 21.569731950759888
+    },
+    {
+      "file": "2d_one_centre_h0.4.json",
+      "all_three_bounds_ordered": true,
+      "admissible_shifts": true,
+      "optimized_dh_below_geometric_majorant": true,
+      "max_primary_equation_residual": 1.3818164849985656e-11,
+      "max_fixed_shift_equation_residual": 3.6044044814852196e-08,
+      "max_fixed_shift_relative_equation_residual": 1.568882181703786e-09,
+      "wall_s": 10.172543048858643
+    },
+    {
+      "file": "2d_one_centre_h0.8.json",
+      "all_three_bounds_ordered": true,
+      "admissible_shifts": true,
+      "optimized_dh_below_geometric_majorant": true,
+      "max_primary_equation_residual": 1.0847824572666067e-10,
+      "max_fixed_shift_equation_residual": 7.604443449944019e-11,
+      "max_fixed_shift_relative_equation_residual": 4.265180798242132e-12,
+      "wall_s": 7.0654988288879395
+    },
+    {
+      "file": "2d_two_centre_h0.1.json",
+      "all_three_bounds_ordered": true,
+      "admissible_shifts": true,
+      "optimized_dh_below_geometric_majorant": true,
+      "max_primary_equation_residual": 2.0712611533243228e-09,
+      "max_fixed_shift_equation_residual": 7.0407337851115e-07,
+      "max_fixed_shift_relative_equation_residual": 3.148543703992209e-08,
+      "wall_s": 188.20288395881653
+    },
+    {
+      "file": "2d_two_centre_h0.2.json",
+      "all_three_bounds_ordered": true,
+      "admissible_shifts": true,
+      "optimized_dh_below_geometric_majorant": true,
+      "max_primary_equation_residual": 9.364487282418807e-11,
+      "max_fixed_shift_equation_residual": 3.948781805493324e-08,
+      "max_fixed_shift_relative_equation_residual": 1.7453941196616069e-09,
+      "wall_s": 47.73229503631592
+    },
+    {
+      "file": "2d_two_centre_h0.4.json",
+      "all_three_bounds_ordered": true,
+      "admissible_shifts": true,
+      "optimized_dh_below_geometric_majorant": true,
+      "max_primary_equation_residual": 2.0158098276649227e-11,
+      "max_fixed_shift_equation_residual": 2.7208074958718272e-09,
+      "max_fixed_shift_relative_equation_residual": 1.203964739490277e-10,
+      "wall_s": 14.790994882583618
+    },
+    {
+      "file": "2d_two_centre_h0.8.json",
+      "all_three_bounds_ordered": true,
+      "admissible_shifts": true,
+      "optimized_dh_below_geometric_majorant": true,
+      "max_primary_equation_residual": 2.3397541891121122e-11,
+      "max_fixed_shift_equation_residual": 2.6601736158727686e-11,
+      "max_fixed_shift_relative_equation_residual": 1.4968697393045205e-12,
+      "wall_s": 7.529543161392212
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "status": "passed",
+  "runs": 3,
+  "independent_test_count": 44,
+  "checks": "all8 parity sectors per actual shift, full spectrum union, explicit bound formula/metadata, baseline dominance, admissibility, ordered true-potential P1 bounds, diameter cap, local patch, matrix invariance, source/mesh SHA256, residuals, physical reference containment",
+  "records": [
+    {
+      "file": "3d_h2plus_cap_h1.0.json",
+      "h": 1.0,
+      "hmax": 0.9996833436734064,
+      "d_h": 0.198847677638109,
+      "Gamma_h": 0.11853424309980169,
+      "L_best": [
+        -1.4767206660580974,
+        -1.408560671781232,
+        -1.3792552646506375
+      ],
+      "U_neumann": [
+        -0.5515785376790494,
+        -0.3499996126546836,
+        -0.2686271610067117
+      ],
+      "U_dirichlet": [
+        -0.5377509022463041,
+        -0.3096347582945631,
+        -0.09756331370518923
+      ],
+      "max_primary_equation_residual": 1.9906573286790134e-12,
+      "n_actual_cecr_solves": 4,
+      "whole_space_confinement": [
+        true,
+        false,
+        false
+      ],
+      "wall_s": 81.24073195457458,
+      "timing": {
+        "averages_symmetry": 5.573063850402832,
+        "cecr_assembly_projection": 10.120471000671387,
+        "cecr_solves": 38.630378007888794,
+        "d_h": 9.522614002227783,
+        "load": 3.054979085922241,
+        "p1_upper": 11.049240112304688,
+        "radial_grid": 3.232836961746216
+      }
+    },
+    {
+      "file": "3d_h2plus_cap_h0.6666666666666666.json",
+      "h": 0.6666666666666666,
+      "hmax": 0.6666520938591061,
+      "d_h": 0.09285855873435891,
+      "Gamma_h": 0.05903194732911734,
+      "L_best": [
+        -0.9972782546387609,
+        -0.8643845633390244,
+        -0.8088011068468368
+      ],
+      "U_neumann": [
+        -0.5550206544180201,
+        -0.3524645079931854,
+        -0.26950270177491653
+      ],
+      "U_dirichlet": [
+        -0.5416525360466393,
+        -0.31373073620020486,
+        -0.10323729556615047
+      ],
+      "max_primary_equation_residual": 3.1023282271963894e-11,
+      "n_actual_cecr_solves": 3,
+      "whole_space_confinement": [
+        true,
+        false,
+        false
+      ],
+      "wall_s": 243.3606629371643,
+      "timing": {
+        "averages_symmetry": 18.904210090637207,
+        "cecr_assembly_projection": 32.798118114471436,
+        "cecr_solves": 109.6649489402771,
+        "d_h": 17.46520495414734,
+        "load": 9.513668060302734,
+        "p1_upper": 51.16168689727783,
+        "radial_grid": 3.7960689067840576
+      },
+      "EOC_d_h": 1.877995456990767,
+      "EOC_Gamma_h": 1.7193171463686665,
+      "EOC_neumann_width_baseline": 1.7133176821434721,
+      "EOC_neumann_width_best": 1.8202672560726174
+    },
+    {
+      "file": "3d_h2plus_cap_h0.5.json",
+      "h": 0.5,
+      "hmax": 0.499969030082031,
+      "d_h": 0.052022092321150376,
+      "Gamma_h": 0.03413275320621921,
+      "L_best": [
+        -0.8083882743835089,
+        -0.6468778297226072,
+        -0.5793366995459497
+      ],
+      "U_neumann": [
+        -0.5564095992508586,
+        -0.3535081387731642,
+        -0.26985082378597625
+      ],
+      "U_dirichlet": [
+        -0.543220481170426,
+        -0.3154295996018113,
+        -0.1054598232083428
+      ],
+      "max_primary_equation_residual": 1.023375377131649e-11,
+      "n_actual_cecr_solves": 4,
+      "whole_space_confinement": [
+        true,
+        false,
+        false
+      ],
+      "wall_s": 899.2597150802612,
+      "timing": {
+        "averages_symmetry": 47.733875036239624,
+        "cecr_assembly_projection": 87.56915307044983,
+        "cecr_solves": 513.5231778621674,
+        "d_h": 41.952019929885864,
+        "load": 26.112035036087036,
+        "p1_upper": 177.9204421043396,
+        "radial_grid": 4.382161855697632
+      },
+      "EOC_d_h": 2.014060090715849,
+      "EOC_Gamma_h": 1.9042596049264555,
+      "EOC_neumann_width_baseline": 1.8795168581723674,
+      "EOC_neumann_width_best": 1.9554505152370665
+    }
+  ]
+}

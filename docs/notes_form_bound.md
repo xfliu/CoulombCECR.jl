@@ -1,6 +1,6 @@
 # Track A — cheaper certified C_ε (radial Neumann decoupling) and per-k choice of ε
 
-Clone: `/mnt/ssd2T-2/xfliu/CoulombCECR_trackA`, base `abf1d8d`, commits `06c77a6`, `95ec234`, `<final>` (see patch).
+Development branch (Track A), base `abf1d8d`, commits `06c77a6`, `95ec234`, `<final>` (see patch).
 All arithmetic is floating point (non-rigorous stage), as in the release.
 
 ## 1. Method
