@@ -44,7 +44,7 @@ C_eps is transferred from it; otherwise only the ladders on the current mesh are
 |---|---|---|
 | 6.2 (2D, one centre) | `CECR_NO_TRANSFER=1 scripts/run.jl 2d_one_centre {1, meshes/square_h020_fixed, 3} results/v1.1/2d` | 1 / 2 / 7 min |
 | 6.3 (2D, two centres) | `CECR_NO_TRANSFER=1 scripts/run.jl 2d_two_centre {1, meshes/box_h020_fixed} results/v1.1/2d` | 2 / 7 min |
-| 6.4 (3D hydrogen) | `CECR_MAX_RUNGS=0 CECR_NO_TRANSFER=1 scripts/run.jl 3d_hydrogen meshes/ball_R6_hXXX_conf results/v1.1/3d` | 9–14 min each |
+| 6.3 (3D hydrogen) | `CECR_MAX_RUNGS=0 CECR_NO_TRANSFER=1 scripts/run.jl 3d_hydrogen meshes/ball_R6_hXXX_conf results/v1.2/3d` | 9–14 min each |
 | 6.5 (3D H2+) | `CECR_SYMMETRY=1,2,3 CECR_MAX_RUNGS=0 CECR_NO_TRANSFER=1 scripts/run.jl 3d_h2plus meshes/box_sym_h{100,050} results/v1.1/3d_sym` | 20 min, 15 GB (h=1) / 29 min, 22 GB (h=0.5) |
 
 Symmetric H2+ meshes: `python3 meshgen/gen_box_symmetric.py --h 1.0 --output meshes/box_sym_h100` (and `--h 0.5`).
