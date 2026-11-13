@@ -6,6 +6,7 @@ using CoulombCECR
 const K3 = 1 / sqrt(3π) * (4 / sqrt(π))^(1 / 3)          # Talenti constant
 const C6_BALL6 = 0.642                                     # (5.5), R = 6
 const C6_LOCAL1 = sqrt(2) * K3                             # (5.6), r = 1
+const R_IN_BALL6 = 5.98795                                # inradius of the 3D hydrogen polyhedron (rounded down)
 const A_ball = (8π / 3)^(2 / 3) * C6_BALL6^2
 const A_loc = (8π / 3)^(2 / 3) * C6_LOCAL1^2
 
@@ -29,10 +30,15 @@ const CASES = Dict(
         eps = 0.55, Ceps = 12.0, sigma = 12.5, eps0 = 0.5, C0 = 11.54,
         S = 1.462, p = 4 / 3, on_boundary = x -> abs(abs(x[1]) - 7) < 1e-9 || abs(abs(x[2]) - 5) < 1e-9),
     "3d_hydrogen" => CaseSpec(name = "3d_hydrogen", dim = 3,
-        bdry_dist = [6.0], rho_max = [6.0], domain_is_ball = true,
+        # The meshed domain is the polyhedron P inscribed in B(0,6) (icosphere
+        # boundary, vertices on |x| = 6); its inradius is R_IN_BALL6 = 5.98795 (rounded
+        # down). The radial form bound uses the ball B(0, R_IN_BALL6) in P, and the
+        # patch term of d_h the local embedding constant (patch in B(0,1), B(0,2) in P).
+        bdry_dist = [R_IN_BALL6], rho_max = [R_IN_BALL6], domain_is_ball = false,
         centers = reshape([0.0, 0.0, 0.0], 3, 1), charges = [1.0],
         eps = 0.6, Ceps = 5.0, sigma = 5.4, eps0 = 0.5, C0 = C0_hydrogen3d(0.5),
-        S = C6_BALL6, p = 1.5, neumann_p1 = true, on_boundary = x -> sqrt(sum(abs2, x)) > 6 - 1e-6),
+        S = C6_LOCAL1, p = 1.5, per_centre = true, r_loc = 1.0,
+        neumann_p1 = true, on_boundary = x -> sqrt(sum(abs2, x)) > 6 - 1e-6),
     "3d_h2plus" => CaseSpec(name = "3d_h2plus", dim = 3,
         bdry_dist = [6.0, 6.0], rho_max = [2.0, 2.0],
         centers = [-2.0 2.0; 0.0 0.0; 0.0 0.0], charges = [1.0, 1.0],

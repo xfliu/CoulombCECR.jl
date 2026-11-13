@@ -57,7 +57,7 @@ test/       unit tests (`Pkg.test()`)
 | Paper section | Problem | Source in this repository |
 |---|---|---|
 | 6.2 | 2D one- and two-centre problems (shrinking cores) | `optimal_rate/results_complete/2d_*.json` |
-| 6.3 | 3D hydrogen on B(0,6) | `results/v1.1/` |
+| 6.3 | 3D hydrogen on the polyhedron P6 inscribed in B(0,6) (inradius 5.98795; radial form bound on the inscribed ball, local embedding constant in d_h) | `results/v1.2/3d/` (supersedes `results/v1.1/3d`, which used the radial bound of the full ball) |
 | 6.4, convergence rate | 3D H2+, shrinking-core meshes | `optimal_rate/results_complete/3d_h2plus_cap_*.json` |
 | 6.4, tight bounds | 3D H2+, fixed-grading symmetric meshes (`meshgen/gen_box_symmetric.py`) | `results/v1.1/`, rechecked with VFEM.jl `fe01ed2` in `results/recheck_vfem_fe01ed2/` |
 

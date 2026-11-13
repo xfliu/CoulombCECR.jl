@@ -78,7 +78,7 @@ def read_cases(root):
         for r in rows:
             r["h"] = get_h(r)
         cases[case] = sorted(rows, key=lambda r: r["h"], reverse=True)
-    files = sorted((root/"results/v1.1/3d").glob("3d_hydrogen*.json"))
+    files = sorted((root/"results/v1.2/3d").glob("3d_hydrogen*.json"))  # polyhedral domain, v1.2
     rows = [dict(json.loads(p.read_text()),_source_json=str(p.relative_to(root))) for p in files]
     for r in rows:
         r["h"] = get_h(r)
@@ -199,6 +199,9 @@ def convergence(rows, case, out):
         ax.set_xticklabels([hlabel(x) for x in sorted(h)])
         ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
         ax.grid(True,which="major",lw=.4,alpha=.3)
+        lo,hi=ax.get_ylim()
+        if hi/lo<30:
+            ax.yaxis.set_minor_formatter(matplotlib.ticker.LogFormatterSciNotation(labelOnlyBase=False,minor_thresholds=(2,0.4)))
     fig.tight_layout(w_pad=1.3)
     save(fig,out/"figures"/f"convergence_{case}")
 
